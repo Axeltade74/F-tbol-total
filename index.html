@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FÚTBOL TOTAL</title><style>
+:root{color-scheme:dark;--navy:#0a1a3a;--navy2:#10285a;--black:#05070d;--red:#e10600;--white:#fff;--mut:#9fb0d0;--line:#1c2f5c;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{background:var(--black);color:var(--white);font-family:"Helvetica Neue",Arial,sans-serif;display:flex;justify-content:center}
+#app{width:100%;max-width:430px;min-height:100vh;background:var(--navy);position:relative;padding-bottom:70px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;align-items:center;gap:10px;padding:10px 14px;background:linear-gradient(90deg,var(--black),var(--navy));border-bottom:3px solid var(--red)}
+.logo{width:34px;height:40px;background:var(--red);color:#fff;font-weight:900;font-size:15px;display:flex;align-items:center;justify-content:center;clip-path:polygon(0 0,100% 0,100% 62%,50% 100%,0 62%);border-bottom:0}
+.brand{font-weight:900;letter-spacing:1px;font-size:17px;line-height:1}.brand small{display:block;font-size:9px;color:var(--mut);letter-spacing:3px;margin-top:3px}
+.live-pill{margin-left:auto;background:var(--red);font-size:10px;font-weight:800;padding:4px 8px;border-radius:3px;letter-spacing:1px}
+.ticker{background:var(--black);overflow:hidden;white-space:nowrap;font-size:12px;padding:7px 0;border-bottom:1px solid var(--line)}
+.ticker span{display:inline-block;padding-left:100%;animation:t 28s linear infinite}
+@keyframes t{to{transform:translateX(-100%)}}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:10px 14px}
+.chips button{flex:none;background:var(--navy2);color:#fff;border:1px solid var(--line);border-radius:20px;padding:7px 13px;font-size:12px;font-weight:700}
+.chips button.on{background:var(--red);border-color:var(--red)}
+.ph{position:relative;background:radial-gradient(circle at 70% 30%,#1f4fa8,#0a1a3a 60%,#05070d);display:flex;align-items:flex-end;overflow:hidden}
+.ph::before{content:"";position:absolute;right:8%;top:12%;width:42%;aspect-ratio:1;border-radius:50%;background:rgba(255,255,255,.07)}
+.ph::after{content:"FOTO OFICIAL LICENCIADA";position:absolute;top:8px;right:8px;font-size:8px;letter-spacing:1px;color:var(--mut);border:1px dashed var(--mut);padding:2px 5px}
+.hero{margin:0 14px;border-radius:10px;height:250px}
+.hero .t{position:relative;z-index:1;padding:14px;width:100%;background:linear-gradient(transparent,rgba(5,7,13,.95))}
+.tag{display:inline-block;background:var(--red);font-size:10px;font-weight:800;padding:3px 7px;letter-spacing:1px;margin-bottom:6px}
+.hero h2{font-size:21px;line-height:1.15;text-transform:uppercase}
+.sec{display:flex;align-items:center;gap:8px;padding:18px 14px 8px;font-weight:900;font-size:15px;letter-spacing:1px;text-transform:uppercase}
+.sec::before{content:"";width:5px;height:18px;background:var(--red)}
+.card{display:flex;gap:10px;margin:0 14px 10px;background:var(--navy2);border-radius:8px;overflow:hidden;border:1px solid var(--line)}
+.card .ph{width:104px;min-height:84px;flex:none}.card .ph::after{display:none}
+.card div.b{padding:9px 9px 9px 0}.card h4{font-size:14px;line-height:1.25;margin:3px 0}
+.meta{font-size:11px;color:var(--mut)}
+.row{display:flex;gap:10px;overflow-x:auto;padding:0 14px}
+.pl{flex:none;width:96px;text-align:center;font-size:11px;font-weight:700}
+.pl .ph{height:96px;border-radius:8px;margin-bottom:5px;align-items:center;justify-content:center;font-size:26px;font-weight:900;color:rgba(255,255,255,.55)}.pl .ph::after,.pl .ph::before{display:none}.pl .ph.has{background-size:cover;background-position:top center;font-size:0}.ph.has::after,.ph.has::before{display:none}.pl{cursor:default}
+.match{margin:0 14px 8px;background:var(--navy2);border:1px solid var(--line);border-radius:8px;padding:11px;display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;text-align:center;font-size:13px;font-weight:700}
+.sc{font-size:22px;font-weight:900;background:var(--black);padding:4px 12px;border-radius:5px}
+.min{grid-column:1/-1;font-size:11px;color:var(--red);font-weight:800}
+nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;display:flex;background:var(--black);border-top:2px solid var(--red);padding-bottom:env(safe-area-inset-bottom,0px);z-index:9}
+nav button{flex:1;background:none;border:0;color:var(--mut);padding:9px 0 8px;font-size:10px;font-weight:700}
+nav button i{display:block;font-style:normal;font-size:18px}
+nav button.on{color:#fff}nav button.on i{color:var(--red)}
+.scr{display:none}.scr.on{display:block}
+.list a{display:flex;justify-content:space-between;padding:14px;margin:0 14px 6px;background:var(--navy2);border-left:4px solid var(--red);border-radius:6px;font-weight:700;font-size:14px;cursor:pointer}
+.form{margin:0 14px;background:var(--navy2);padding:14px;border-radius:8px;border:1px solid var(--line)}
+.form input,.form select{width:100%;padding:11px;margin:6px 0 10px;background:var(--black);color:#fff;border:1px solid var(--line);border-radius:6px;font-size:14px}
+.form label{font-size:11px;color:var(--mut);font-weight:700}
+.btn{width:100%;background:var(--red);color:#fff;border:0;padding:12px;font-weight:800;border-radius:6px;letter-spacing:1px}
+.adm{display:flex;align-items:center;gap:8px;margin:0 14px 6px;background:var(--navy2);padding:9px;border-radius:6px;font-size:12px}
+.adm b{flex:1;font-weight:600}.adm button{background:var(--black);color:#fff;border:1px solid var(--line);border-radius:4px;padding:5px 8px;font-size:11px}
+.note{margin:14px;font-size:11px;color:var(--mut);line-height:1.4;border:1px dashed var(--line);padding:10px;border-radius:6px}
+
+.ph.img{background-size:cover;background-position:top center}.ph.img::after,.ph.img::before{display:none}
+a.card{color:inherit;text-decoration:none}.cred{font-size:10px;color:var(--mut);padding:0 14px 14px;line-height:1.5}.cred a{color:var(--mut)}
+.chip-pill{display:inline-block;margin-right:6px}
+</style></head><body>
+<div id="app">
+<header><div class="logo">FT</div><div class="brand">FÚTBOL TOTAL<small>PERIODISMO DEPORTIVO</small></div><div class="live-pill" id="lp">● EN VIVO</div></header>
+<div class="ticker"><span id="tk">ÚLTIMO MOMENTO</span></div>
+<section class="scr on" id="s-inicio"><div class="chips" id="chips"></div>
+<a class="hero ph" id="hero" target="_blank" rel="noopener" style="display:flex;text-decoration:none;color:#fff"><div class="t"><span class="tag">PORTADA</span><h2></h2><div class="meta"></div></div></a>
+<div class="sec">Último momento</div><div id="home-news"></div>
+<div class="sec">Figuras del fútbol</div><div class="row" id="players"></div>
+<div class="sec">En vivo y resultados</div><div id="home-live"></div>
+<div class="sec">Mercado de pases</div><div id="home-mkt"></div><div class="cred" id="cred"></div></section>
+<section class="scr" id="s-noticias"><div class="sec">Noticias</div><div id="all-news"></div></section>
+<section class="scr" id="s-vivo"><div class="sec">En vivo</div><div id="live"></div><div class="sec">Resultados y estadísticas</div><div id="res"></div></section>
+<section class="scr" id="s-mercado"><div class="sec">Mercado de pases</div><div id="mkt"></div></section>
+<section class="scr" id="s-mas"><div class="sec">Secciones</div><div class="list" id="secs"></div><div class="note" id="upd"></div></section>
+<nav id="nav"></nav></div>
+<script>
+var D={news:[],matches:[],photos:{}},cat="Todo";
+var cats=["Todo","Fútbol argentino","Fútbol internacional","Champions League","Copa Libertadores","Selecciones nacionales"];
+var secs=["Inicio","Noticias","Fútbol argentino","Fútbol internacional","Champions League","Copa Libertadores","Selecciones nacionales","Mercado de pases","Resultados y estadísticas","En vivo","Entrevistas y análisis"];
+var names=["Lionel Messi","Cristiano Ronaldo","Kylian Mbappé","Neymar Jr.","Lamine Yamal","Erling Haaland","Julián Álvarez","Vinícius Júnior","Mohamed Salah","Lautaro Martínez"];
+var $=function(i){return document.getElementById(i)};
+function esc(x){return String(x==null?"":x).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function ago(ts){var m=Math.max(1,Math.round((Date.now()-ts)/60000));return m<60?"hace "+m+" min":m<1440?"hace "+Math.round(m/60)+" h":"hace "+Math.round(m/1440)+" d"}
+function safe(u){return u&&u.indexOf("https://")===0?u:"#"}
+function card(n){return '<a class="card" href="'+esc(safe(n.url))+'" target="_blank" rel="noopener"><div class="ph"></div><div class="b"><span class="tag">'+esc(n.c).toUpperCase()+'</span><h4>'+esc(n.t)+'</h4><div class="meta">'+esc(n.src)+' · '+ago(n.ts)+'</div></div></a>'}
+function match(m){var s=m.st=="prox"?"vs":m.sa+" - "+m.sb;var t=m.st=="live"?"● EN VIVO "+m.min:m.st=="fin"?"FIN":new Date(m.ts).toLocaleTimeString("es-AR",{hour:"2-digit",minute:"2-digit"});return '<div class="match"><span>'+esc(m.a)+'</span><span class="sc">'+s+'</span><span>'+esc(m.b)+'</span><span class="min">'+t+' · '+esc(m.lg)+'</span></div>'}
+function render(){var n=D.news,f=n.filter(function(x){return cat=="Todo"||x.c==cat}),h=n[0];
+ if(h){var he=$("hero");he.href=safe(h.url);he.querySelector("h2").textContent=h.t;he.querySelector(".meta").textContent=h.src+" · "+ago(h.ts);
+  var p=names.filter(function(x){return h.t.indexOf(x.split(" ").pop())>-1&&D.photos[x]})[0];
+  he.style.backgroundImage=p?"url("+D.photos[p].img+")":"";he.style.backgroundSize="cover";he.style.backgroundPosition="top center";he.classList.toggle("img",!!p)}
+ $("home-news").innerHTML=f.slice(0,5).map(card).join("")||'<div class="note">Sin noticias.</div>';
+ $("all-news").innerHTML=n.map(card).join("");
+ var mk=n.filter(function(x){return x.c=="Mercado de pases"}).slice(0,6).map(card).join("")||'<div class="note">Sin novedades.</div>';
+ $("home-mkt").innerHTML=$("mkt").innerHTML=mk;
+ var lv=D.matches.filter(function(m){return m.st=="live"}),rs=D.matches.filter(function(m){return m.st!="live"});
+ $("live").innerHTML=lv.map(match).join("")||'<div class="note">No hay partidos en vivo ahora.</div>';
+ $("res").innerHTML=rs.map(match).join("")||'<div class="note">Sin partidos hoy.</div>';
+ $("home-live").innerHTML=D.matches.slice(0,5).map(match).join("")||'<div class="note">Sin partidos hoy.</div>';
+ $("lp").style.display=lv.length?"block":"none";
+ $("tk").textContent="ÚLTIMO MOMENTO ▸ "+n.slice(0,6).map(function(x){return x.t}).join(" ▸ ");
+ $("players").innerHTML=names.map(function(x){var p=D.photos[x];return '<div class="pl"><div class="ph'+(p?' img':'')+'"'+(p?' style="background-image:url('+esc(p.img)+')"':'')+'>'+(p?'':x.split(" ").map(function(w){return w[0]}).join("").slice(0,2))+'</div>'+x+'</div>'}).join("");
+ $("cred").innerHTML=Object.keys(D.photos).length?"Fotos: "+Object.keys(D.photos).map(function(k){var p=D.photos[k];return esc(k)+' — <a href="'+esc(safe(p.page))+'" target="_blank" rel="noopener">'+esc(p.credit)+', '+esc(p.license)+'</a>'}).join(" · "):"";
+ $("upd").textContent=D.updated?"Última actualización automática: "+new Date(D.updated).toLocaleString("es-AR"):"";}
+function load(){fetch("data.json?"+Date.now()).then(function(r){return r.json()}).then(function(d){D=d;render()}).catch(function(){})}
+$("chips").innerHTML=cats.map(function(c,i){return '<button class="'+(i?"":"on")+'">'+c+'</button>'}).join("");
+$("chips").onclick=function(e){if(e.target.tagName=="BUTTON"){[].forEach.call($("chips").children,function(b){b.className=""});e.target.className="on";cat=e.target.textContent;render()}};
+$("secs").innerHTML=secs.map(function(s,i){return '<a>'+(i+1)+'. '+s+'<span>›</span></a>'}).join("");
+var tabs=[["inicio","⌂","Inicio"],["noticias","▤","Noticias"],["vivo","●","En vivo"],["mercado","⇄","Mercado"],["mas","☰","Más"]];
+$("nav").innerHTML=tabs.map(function(t,i){return '<button data-t="'+t[0]+'" class="'+(i?"":"on")+'"><i>'+t[1]+'</i>'+t[2]+'</button>'}).join("");
+$("nav").onclick=function(e){var b=e.target.closest("button");if(!b)return;[].forEach.call(document.querySelectorAll("nav button"),function(x){x.className=""});b.className="on";[].forEach.call(document.querySelectorAll(".scr"),function(x){x.className="scr"});$("s-"+b.dataset.t).className="scr on";window.scrollTo(0,0)};
+load();setInterval(load,60000);
+</script></body></html>
